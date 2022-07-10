@@ -1,0 +1,5 @@
+[console_scripts]
+backuper-db = backuper.db.__main__:main
+backuper-start = backuper.backuper.__main__:main
+backuper-status = backuper.backuper.__main__:status
+
