@@ -1,5 +1,6 @@
 """
-API для управления процессом сохранения бэкапов конфигов для компании IT Service
+Management for configuration backup process
+
 """
 __author__ = 'Ivan Balakin'
 __maintainer__ = __author__

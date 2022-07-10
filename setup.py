@@ -33,12 +33,15 @@ setup(
     url='https://github.com/nekonekun/ztp_api',
     platforms='all',
     classifiers=[
-        'Intended Audience :: Developers',
-        'Natural Language :: Russian',
+        'Development Status :: 2 - Pre-Alpha',
+        'License :: OSI Approved :: MIT License',
+        'Intended Audience :: Telecommunications Industry',
+        'Topic :: Utilities',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.10',
-        'Programming Language :: Python :: Implementation :: CPython'
+        'Programming Language :: Python :: Implementation :: CPython',
+        'Natural Language :: Russian',
     ],
     python_requires='>=3.10',
     packages=find_packages(exclude=['tests']),

@@ -18,4 +18,13 @@ None (at this moment)
 
 HOWTO:
 ----
-To be described...
+backuper-db
+~~~~
+
+If postgres url is set via cfg.py or environmental variable:
+
+    backuper-db upgrade head
+
+If postgres url is not set:
+
+    backuper-db --pg-url=postgresql://username:password@host/database upgrade head
