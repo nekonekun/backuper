@@ -1,2 +1,0 @@
-# Will be moved to another place in further releases
-DEFAULT_PG_URL = 'postgresql://username:password@host/database'

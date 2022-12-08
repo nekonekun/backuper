@@ -1,0 +1,27 @@
+- type: model
+  model: DGS-3000-10L Gigabit Ethernet Switch
+  method_name: dlink_new
+- type: model
+  model: DGS-3000-20L Gigabit Ethernet Switch
+  method_name: dlink_new
+- type: model
+  model: DGS-3000-28L Gigabit Ethernet Switch
+  method_name: dlink_new
+- type: model
+  model: DGS-3000-28LP Gigabit Ethernet Switch
+  method_name: dlink_new
+- type: model
+  model: DGS-3000-52L Gigabit Ethernet Switch
+  method_name: dlink_new
+- type: model
+  model: DGS-3000-28X Gigabit Ethernet Switch
+  method_name: dlink_new
+- type: model
+  model: DGS-3000-52X Gigabit Ethernet Switch
+  method_name: dlink_new
+- type: model
+  model: DGS-3000-10TC Gigabit Ethernet Switch
+  method_name: dlink_new
+- type: model
+  model: DGS-3000-28SC Gigabit Ethernet Switch
+  method_name: dlink_new

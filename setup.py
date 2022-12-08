@@ -49,9 +49,11 @@ setup(
     extras_require={'dev': load_requirements('requirements.dev.txt')},
     entry_points={
         'console_scripts': [
-            '{0}-start = {0}.backuper.__main__:main'.format(module_name),
-            '{0}-status = {0}.backuper.__main__:status'.format(module_name),
-            '{0}-db = {0}.db.__main__:main'.format(module_name)
+            # '{0}-start = {0}.backuper.__main__:main'.format(module_name),
+            # '{0}-status = {0}.backuper.__main__:status'.format(module_name),
+            '{0}db = backuper.db.alembic.__main__:main'.format(module_name),
+            '{0}ctl = backuper.control.__main__:main'.format(module_name),
+            '{0} = backuper.process.__main__:main'.format(module_name)
         ]
     },
     include_package_data=True

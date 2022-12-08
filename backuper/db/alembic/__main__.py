@@ -2,17 +2,15 @@ import os
 from alembic.config import CommandLine, Config
 from pathlib import Path
 
-from backuper.cfg import DEFAULT_PG_URL
 
-
-PROJECT_PATH = Path(__file__).parent.parent.resolve()
+PROJECT_PATH = Path(__file__).parent.parent.parent.resolve()
 
 
 def main():
     alembic = CommandLine()
     alembic.parser.add_argument(
-        '--pg-url', default=os.getenv('ANALYZER_PG_URL', DEFAULT_PG_URL),
-        help='Database URL [env var: ANALYZER_PG_URL]'
+        '--database', default=os.getenv('BACKUPER_DATABASE'),
+        help='Database URL [env var: BACKUPER_DATABASE]'
     )
 
     # Transforming relative path to absolute.
@@ -25,14 +23,15 @@ def main():
                     cmd_opts=options)
 
     # Substituting path to alembic folder to absolute path.
-    # Needed for Alembic to locate env.py, migration genetion templates and migrations themselves.
+    # Needed for Alembic to locate env.py, migration genetion templates
+    # and migrations themselves.
     alembic_location = config.get_main_option('script_location')
     if not os.path.isabs(alembic_location):
         config.set_main_option('script_location',
                                os.path.join(PROJECT_PATH, alembic_location))
 
     # Changing sqlalchemy.url value from Alembic config
-    config.set_main_option('sqlalchemy.url', options.pg_url)
+    config.set_main_option('sqlalchemy.url', options.database)
 
     # Run Alembic command
     exit(alembic.run_cmd(config, options))

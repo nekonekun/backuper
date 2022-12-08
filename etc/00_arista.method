@@ -1,0 +1,14 @@
+type: method
+name: arista
+description: Main Arista backup template
+actions:
+  - method: 'post'
+    url: '/terminal/send_commands'
+    params: ~
+    data: '{{
+               "ip_address": "{ip_address}",
+               "connection_mode": "arista",
+               "commands": [
+                   "copy running-config tftp:{tftp_address}/{tftp_folder}{device_name}.cfg"
+               ]
+           }}'

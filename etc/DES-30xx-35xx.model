@@ -1,0 +1,12 @@
+- type: model
+  model: D-Link DES-3052 Fast Ethernet Switch
+  method_name: dlink_old
+- type: model
+  model: D-Link DES-3028 Fast Ethernet Switch
+  method_name: dlink_old
+- type: model
+  model: DES-3528 Fast Ethernet Switch
+  method_name: dlink_old
+- type: model
+  model: DES-3552 Fast Ethernet Switch
+  method_name: dlink_old

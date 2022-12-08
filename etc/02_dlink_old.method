@@ -1,0 +1,32 @@
+type: method
+name: dlink_old
+description: Dlink - old models (DES-30xx, DES-35xx)
+actions:
+  - method: 'get'
+    url: '/snmp/v2/set'
+    params:
+      ip: '{ip_address}'
+      oid: '1.3.6.1.4.1.171.12.1.2.1.1.3.3'
+      value: '{tftp_address}'
+    data: ~
+  - method: 'get'
+    url: '/snmp/v2/set'
+    params:
+      ip: '{ip_address}'
+      oid: '1.3.6.1.4.1.171.12.1.2.1.1.5.3'
+      value: '{tftp_folder}{device_name}.cfg'
+    data: ~
+  - method: 'get'
+    url: '/snmp/v2/set'
+    params:
+      ip: '{ip_address}'
+      oid: '1.3.6.1.4.1.171.12.1.2.1.1.7.3'
+      value: '2'
+    data: ~
+  - method: 'get'
+    url: '/snmp/v2/set'
+    params:
+      ip: '{ip_address}'
+      oid: '1.3.6.1.4.1.171.12.1.2.1.1.8.3'
+      value: '3'
+    data: ~

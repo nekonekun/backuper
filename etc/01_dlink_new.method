@@ -1,0 +1,32 @@
+type: method
+name: dlink_new
+description: Dlink - new models (DGS-3000, DES-3200 rev C)
+actions:
+  - method: 'get'
+    url: '/snmp/v2/set'
+    params:
+      ip: '{ip_address}'
+      oid: '1.3.6.1.4.1.171.12.1.2.18.1.1.3.3'
+      value: '{tftp_address}'
+    data: ~
+  - method: 'get'
+    url: '/snmp/v2/set'
+    params:
+      ip: '{ip_address}'
+      oid: '1.3.6.1.4.1.171.12.1.2.18.1.1.5.3'
+      value: '{tftp_folder}{device_name}.cfg'
+    data: ~
+  - method: 'get'
+    url: '/snmp/v2/set'
+    params:
+      ip: '{ip_address}'
+      oid: '1.3.6.1.4.1.171.12.1.2.18.1.1.8.3'
+      value: '2'
+    data: ~
+  - method: 'get'
+    url: '/snmp/v2/set'
+    params:
+      ip: '{ip_address}'
+      oid: '1.3.6.1.4.1.171.12.1.2.18.1.1.12.3'
+      value: '3'
+    data: ~

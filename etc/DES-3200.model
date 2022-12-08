@@ -1,0 +1,6 @@
+- type: model
+  model: DES-3200-52/C1 Fast Ethernet Switch
+  method_name: dlink_new
+- type: model
+  model: DES-3200-28/C1 Fast Ethernet Switch
+  method_name: dlink_new

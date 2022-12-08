@@ -1,64 +1,39 @@
-from enum import Enum, unique
-
-import sqlalchemy as sa
-import sqlalchemy.dialects.postgresql as sa_pg
-
-
-naming_convention = {
-    'all_column_names': lambda constraint, table: '_'.join([
-        column.name for column in constraint.columns.values()
-    ]),
-    # Indexes
-    'ix': 'ix__%(table_name)s__%(all_column_names)s',
-    # Unique indexes
-    'uq': 'uq__%(table_name)s__%(all_column_names)s',
-    # CHECK-constraints
-    'ck': 'ck__%(table_name)s__%(constraint_name)s',
-    # Foreign keys
-    'fk': 'fk__%(table_name)s__%(all_column_names)s__%(referred_table_name)s',
-    # Primary keys
-    'pk': 'pk__%(table_name)s'
-}
-
-metadata = sa.MetaData(naming_convention=naming_convention)
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from sqlalchemy.dialects.postgresql import INET, JSONB, CIDR
+from sqlalchemy.orm import relationship
+from backuper.db.base import Base
 
 
-@unique
-class BackupStatus(Enum):
-    SUCCESS = 'Success'
-    FAILED_TO_OBTAIN_MODEL = 'Failed to obtain model'
-    UNKNOWN_MODEL = 'Unknown model'
-    BACKUP_FAILED = 'Backup failed'
+class Method(Base):
+    __tablename__ = 'methods'
+    id = Column('id', Integer, primary_key=True, nullable=False)
+    name = Column('name', String, nullable=False, unique=True)
+    description = Column('description', String)
+    actions = Column('actions', JSONB)
 
 
-backup_statuses_table = sa.Table(
-    'backup_statuses',
-    metadata,
-    sa.Column('ip', sa_pg.INET, primary_key=True),
-    sa.Column('status', sa.Enum(BackupStatus, name='backup_status')),
-    sa.Column('updated', sa.DateTime),
-    sa.Column('backuped', sa.DateTime),
-)
+class Subnet(Base):
+    __tablename__ = 'subnets'
+    id = Column('id', Integer, primary_key=True, nullable=False)
+    subnet = Column('subnet', CIDR)
+    folder = Column('folder', String, server_default='')
+    enabled = Column('enabled', Boolean, server_default='true')
 
-backup_methods_table = sa.Table(
-    'backup_methods',
-    metadata,
-    sa.Column('id', sa.Integer, primary_key=True),
-    sa.Column('method_name', sa.String, index=True),
-    sa.Column('params', sa_pg.JSONB),
-)
 
-models_table = sa.Table(
-    'models',
-    metadata,
-    sa.Column('id', sa.Integer, primary_key=True),
-    sa.Column('model', sa.String, index=True),
-    sa.Column('method', sa.ForeignKey('backup_methods.id')),
-)
+class DistinctDevice(Base):
+    __tablename__ = 'distinct_devices'
+    id = Column('id', Integer, primary_key=True, nullable=False)
+    enabled = Column('enabled', Boolean, server_default='true')
+    ip_address = Column('ip_address', INET)
+    folder = Column('folder', String, server_default='')
+    device_name = Column('device_name', String)
+    method_name = Column(ForeignKey('methods.name'))
+    method = relationship(Method)
 
-special_switches_table = sa.Table(
-    'special_switches',
-    metadata,
-    sa.Column('ip', sa_pg.INET, primary_key=True),
-    sa.Column('method', sa.ForeignKey('backup_methods.id')),
-)
+
+class Model(Base):
+    __tablename__ = 'models'
+    id = Column('id', Integer, primary_key=True, nullable=False)
+    model = Column('model', String)
+    method_name = Column(ForeignKey(Method.name))
+    method = relationship(Method)
